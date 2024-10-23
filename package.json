@@ -20,8 +20,7 @@
         "owner": "Anupam00777",
         "repo": "Mentor-Manager",
         "releaseType": "release"
-      },
-      "always"
+      }
     ],
     "win": {
       "target": "nsis",
