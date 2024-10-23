@@ -7,11 +7,12 @@ export const sendRequest = async (
   callback = null
 ) => {
   let res;
+  const accessKey = localStorage.getItem("accessKey");
   try {
     res = await fetch(`${SERVER_URL}${path}`, {
       method,
       credentials: "include",
-      headers,
+      headers: { ...headers, accesskey: accessKey },
       body: body ? JSON.stringify(body) : null,
     });
   } catch (error) {
@@ -27,13 +28,13 @@ export const handleServerError = (error) => {
   console.error(error);
 };
 
-export const checkAuthorisation = async (accessKey, callback) => {
+export const checkAuthorisation = async (callback) => {
   try {
     return sendRequest(
       `/authenticate`,
-      "POST",
+      "GET",
       { "Content-Type": "application/json" },
-      { accessKey },
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();

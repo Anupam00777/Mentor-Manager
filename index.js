@@ -83,7 +83,6 @@ function createWindow() {
   win.on("closed", () => {
     win = null;
   });
-
   // Start checking for updates
   autoUpdater.checkForUpdatesAndNotify();
 }

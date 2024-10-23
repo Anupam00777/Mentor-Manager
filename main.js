@@ -15,6 +15,7 @@ async function fetchInsights() {
         "There was a problem connecting to server. Check your internet connection or wait for server to restart.",
         "error"
       );
+      return;
     }
 
     document.getElementById("total-mentors").textContent =
@@ -60,8 +61,7 @@ async function main() {
   let isAuthorized = false;
 
   while (!isAuthorized) {
-    const res = await checkAuthorisation(localStorage.getItem("accessKey"));
-
+    const res = await checkAuthorisation();
     if (res.error) {
       const key = await showInputPrompt("Enter Access Key!");
       console.log(key);
