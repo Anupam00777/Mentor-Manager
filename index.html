@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentor Salary Management - Dashboard</title>
+    <link rel="stylesheet" href="style.dist.css" />
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg p-4">
+      <div class="container mx-auto flex justify-between">
+        <div class="text-xl font-bold">Mentor Salary Management</div>
+        <ul class="flex space-x-6">
+          <li><a href="#" class="hover:text-blue-500">Dashboard</a></li>
+          <li>
+            <a href="pages/mentors.html" class="hover:text-blue-500">Mentors</a>
+          </li>
+          <li>
+            <a href="pages/mentees.html" class="hover:text-blue-500">Mentees</a>
+          </li>
+          <li>
+            <a href="pages/salary.html" class="hover:text-blue-500">Salary</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Dashboard Section -->
+    <div class="container mx-auto py-12">
+      <h1 class="text-4xl font-bold mb-8 text-center">
+        Mentor and Mentees Overview
+      </h1>
+
+      <!-- Dashboard Metrics -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Total Mentors -->
+        <div class="bg-white shadow-md rounded-lg p-6 text-center">
+          <h2 class="text-2xl font-bold mb-4">Total Mentors</h2>
+          <p id="total-mentors" class="text-5xl font-semibold text-blue-500">
+            0
+          </p>
+        </div>
+
+        <!-- Total Mentees -->
+        <div class="bg-white shadow-md rounded-lg p-6 text-center">
+          <h2 class="text-2xl font-bold mb-4">Total Mentees</h2>
+          <p id="total-mentees" class="text-5xl font-semibold text-green-500">
+            0
+          </p>
+        </div>
+
+        <!-- Mentors on Leave -->
+        <div class="bg-white shadow-md rounded-lg p-6 text-center">
+          <h2 class="text-2xl font-bold mb-4">Mentors on Leave</h2>
+          <p id="mentors-onleave" class="text-5xl font-semibold text-red-500">
+            0
+          </p>
+        </div>
+
+        <!-- Monthly Salaries -->
+        <div class="bg-white shadow-md rounded-lg p-6 text-center">
+          <h2 class="text-2xl font-bold mb-4">Total Monthly Salaries</h2>
+          <p id="monthly-salary" class="text-5xl font-semibold text-purple-500">
+            ₹0
+          </p>
+        </div>
+      </div>
+
+      <!-- Salary Breakdown Section -->
+      <div class="mt-12">
+        <h2 class="text-3xl font-bold mb-6">Monthly Salary Breakdown</h2>
+        <div class="bg-white shadow-md rounded-lg p-6">
+          <table class="min-w-full table-auto">
+            <thead>
+              <tr>
+                <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                  Mentor Name
+                </th>
+                <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                  Days Worked
+                </th>
+                <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                  Total Leaves
+                </th>
+                <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                  Total Salary
+                </th>
+              </tr>
+            </thead>
+            <tbody id="salary-breakdown-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

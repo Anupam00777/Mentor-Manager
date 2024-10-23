@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentor Salary Management - Mentors</title>
+    <link rel="stylesheet" href="../style.dist.css" />
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg p-4">
+      <div class="container mx-auto flex justify-between">
+        <div class="text-xl font-bold">Mentor Salary Management</div>
+        <ul class="flex space-x-6">
+          <li>
+            <a href="../index.html" class="hover:text-blue-500">Dashboard</a>
+          </li>
+          <li><a href="#" class="hover:text-blue-500">Mentors</a></li>
+          <li>
+            <a href="./mentees.html" class="hover:text-blue-500">Mentees</a>
+          </li>
+          <li>
+            <a href="./salary.html" class="hover:text-blue-500">Salary</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Mentors Section -->
+    <div class="container mx-auto py-12">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">Mentors</h1>
+        <div class="space-x-2">
+          <button
+            class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+            onclick="window.location.reload()"
+          >
+            Refresh
+          </button>
+          <a
+            class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+            href="editMentor.html"
+            target="_blank"
+          >
+            Add New Mentor
+          </a>
+        </div>
+      </div>
+
+      <!-- Mentor List Table -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <table class="min-w-full table-auto" id="mentors-table">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Name
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Email
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Phone
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Pay per Day per Mentee
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Status
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Start Date
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody id="mentors-tbody">
+            <!-- Mentor rows will be populated here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script type="module" src="../js/mentors.js"></script>
+  </body>
+</html>

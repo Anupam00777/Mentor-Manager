@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentor Salary Management - Add/Edit Mentor</title>
+    <link rel="stylesheet" href="../style.dist.css" />
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <!-- Main Form Section -->
+    <div class="container mx-auto py-12">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold" id="form-title">Add/Edit Mentor</h1>
+      </div>
+
+      <!-- Mentor Form -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <form id="mentor-form">
+          <div class="grid grid-cols-2 gap-6">
+            <!-- Mentor Name -->
+            <div>
+              <label for="mentor-name" class="block text-gray-700 font-medium"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="mentor-name"
+                name="name"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter mentor's name"
+                required
+              />
+            </div>
+
+            <!-- Mentor Email -->
+            <div>
+              <label for="mentor-email" class="block text-gray-700 font-medium"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="mentor-email"
+                name="email"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter mentor's email" 
+              />
+            </div>
+
+            <!-- Mentor Phone -->
+            <div>
+              <label for="mentor-phone" class="block text-gray-700 font-medium"
+                >Mobile</label
+              >
+              <input
+                type="text"
+                id="mentor-phone"
+                name="mobile"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter mentor's mobile number"
+              />
+            </div>
+
+            <!-- Pay per Mentee per Day -->
+            <div>
+              <label for="mentor-pay" class="block text-gray-700 font-medium"
+                >Pay Per Mentee Per Day</label
+              >
+              <input
+                type="text"
+                id="mentor-pay"
+                name="pay"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter pay per mentee per day"
+                required
+                pattern="^\d+(\.\d{1,2})?$"
+                title="Please enter a valid amount (e.g., 50 or 50.00)"
+              />
+            </div>
+
+            <!-- Start Date -->
+            <div>
+              <label for="mentor-start" class="block text-gray-700 font-medium"
+                >Start Date</label
+              >
+              <input
+                type="date"
+                id="mentor-start"
+                name="startDate"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <!-- Paid Leaves -->
+            <div>
+              <label for="mentor-leaves" class="block text-gray-700 font-medium"
+                >Paid Leaves Per Month</label
+              >
+              <input
+                type="number"
+                id="mentor-leaves"
+                name="paidLeaves"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter number of paid leaves"
+                required
+              />
+            </div>
+
+            <!-- Status -->
+            <div>
+              <label for="mentor-status" class="block text-gray-700 font-medium"
+                >Status</label
+              >
+              <select
+                id="mentor-status"
+                name="status"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="active">Active</option>
+                <option value="inActive">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="mt-6">
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+      <div id="leaves" class="container mx-auto py-12" style="display: none;">
+  <div  class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Leaves</h1>
+    <div class="flex items-center">
+      <input
+        type="date"
+        id="leave-date"
+        class="border rounded-md px-4 py-2 mr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        required
+      />
+      <a
+        class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 cursor-pointer"
+        id="add-leave-button"
+      >
+        Add a leave record
+      </a>
+    </div>
+  </div>
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <table class="min-w-full table-auto" id="leaves-table">
+      <thead>
+        <tr>
+          <th class="px-4 py-2 text-left text-gray-600 font-medium">Date</th>
+          <th class="px-4 py-2 text-left text-gray-600 font-medium">Mentee Count</th>
+          <th class="px-4 py-2 text-left text-gray-600 font-medium">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="leaves-tbody">
+        <!-- Mentor rows will be populated here -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+    <script type="module" src="../js/editMentor.js"></script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentor Salary Management - Monthly Salaries</title>
+    <link rel="stylesheet" href="../style.dist.css" />
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg p-4">
+      <div class="container mx-auto flex justify-between">
+        <div class="text-xl font-bold">Mentor Salary Management</div>
+        <ul class="flex space-x-6">
+          <li>
+            <a href="../index.html" class="hover:text-blue-500">Dashboard</a>
+          </li>
+          <li>
+            <a href="./mentors.html" class="hover:text-blue-500">Mentors</a>
+          </li>
+          <li>
+            <a href="./mentees.html" class="hover:text-blue-500">Mentees</a>
+          </li>
+          <li><a href="#" class="hover:text-blue-500">Salary</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Salary Section -->
+    <div class="container mx-auto py-12">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">Monthly Salary</h1>
+        <div class="space-x-2">
+          <button
+            class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+            onclick="window.location.reload()"
+          >
+            Refresh
+          </button>
+          <a
+            class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+            href="editMonthlySalary.html"
+            target="_blank"
+          >
+            Add New Record
+          </a>
+        </div>
+      </div>
+
+      <!-- Salaries List Table -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <table class="min-w-full table-auto">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Mentor Name
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Month
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Total Salary
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Status
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody id="salaries-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <script type="module" src="../js/salary.js"></script>
+  </body>
+</html>

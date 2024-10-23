@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popup</title>
+    <link rel="stylesheet" href="../style.dist.css" />
+  </head>
+  <style>
+    /* styles.css */
+    body {
+      margin: 0;
+      padding: 0;
+      background: rgba(
+        255,
+        255,
+        255,
+        0
+      ); /* Slightly transparent white background */
+      color: #000; /* Text color */
+    }
+
+    .popup-content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff; /* Primary button color */
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3; /* Darker shade on hover */
+    }
+
+    .popup-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+  <body>
+    <div class="popup-container">
+      <div class="popup">
+        <h2 id="popup-title" class="text-lg font-bold"></h2>
+        <p id="popup-message" class="my-4"></p>
+        <div class="flex justify-end">
+          <button
+            id="cancel-button"
+            class="bg-red-500 text-white px-4 py-2 rounded-md mr-2"
+          >
+            Cancel
+          </button>
+          <button
+            id="continue-button"
+            class="bg-blue-500 text-white px-4 py-2 rounded-md"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="../js/popup.js"></script>
+  </body>
+</html>
