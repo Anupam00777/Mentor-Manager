@@ -1,11 +1,11 @@
 {
   "name": "mentor-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm-run-all -p watch:css watch:electron",
-    "build": "npm run build:css && electron-builder",
+    "build": "npm run build:css",
     "build:css": "npx tailwindcss -i ./style.css -o ./style.dist.css",
     "watch:css": "npx tailwindcss -i ./style.css -o ./style.dist.css --watch",
     "watch:electron": "nodemon --exec \"electron .\" --ext js,html,css"
