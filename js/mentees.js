@@ -29,10 +29,12 @@ async function DeleteMentee(name, id) {
   });
 }
 // Function to populate the mentee table
-async function populateMenteeTable(mentees) {
+async function populateMenteeTable(limit = 50, skip = 0) {
+  const mentees = await getAllMentees(limit, skip);
+  if (mentees.length === 0) return 0;
+  const mentors = await getAllMentors();
   const tbody = document.getElementById("mentees-tbody");
   tbody.innerHTML = ""; // Clear existing content
-  const mentors = await getAllMentors();
   mentees?.forEach((mentee, index) => {
     const row = document.createElement("tr");
     if (index % 2 === 1) {
@@ -69,15 +71,28 @@ async function populateMenteeTable(mentees) {
       .getElementById(`Delete_${mentee.id}`)
       .addEventListener("click", () => DeleteMentee(mentee.name, mentee.id));
   });
+  return 1;
 }
 
-// Function to load mentees on page load
-async function loadMentess() {
-  const mentees = await getAllMentees();
-  console.log(mentees);
+// Function to load mentors on page load
+let limit = 50; // Set the limit for pagination
+let skip = 0; // Initial skip value
+async function loadMentees() {
+  document.getElementById("next-page").addEventListener("click", async () => {
+    skip += limit; // Increase skip for next page
+    const res = await populateMenteeTable(limit, skip);
+    if (res === 0) skip -= limit; // If no more mentors, revert skip
+  });
 
-  await populateMenteeTable(mentees);
+  document.getElementById("prev-page").addEventListener("click", () => {
+    if (skip > 0) {
+      skip = Math.max(0, skip - limit); // Decrease skip for previous page
+      populateMenteeTable(limit, skip);
+    }
+  });
+
+  await populateMenteeTable(limit, skip);
 }
 
 // Call loadMentees on page load
-loadMentess();
+loadMentees();

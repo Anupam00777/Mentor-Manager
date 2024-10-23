@@ -107,13 +107,12 @@ async function main() {
     if (mentor) {
       populateForm(mentor);
       document.getElementById("leaves").style.display = "block";
-      populateLeavesTable(mentor);
+      await populateLeavesTable(mentor);
       document.getElementById("form-title").textContent = "Edit Mentor"; // Update title for edit mode
       document
         .getElementById("add-leave-button")
         .addEventListener("click", async () => {
           const date = document.getElementById("leave-date").value;
-          console.log(date);
           if (!date) return;
           const response = await modifyDailySalaryRecord(
             { date: date, mentor_id: mentor.id },

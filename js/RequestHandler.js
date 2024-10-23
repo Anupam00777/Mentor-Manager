@@ -4,12 +4,15 @@ export const sendRequest = async (
   method = "GET",
   headers = {},
   body = null,
+  query = null,
   callback = null
 ) => {
   let res;
   const accessKey = localStorage.getItem("accessKey");
+  const queryString = new URLSearchParams(query).toString();
+  const fullPath = query ? `${path}?${queryString}` : path;
   try {
-    res = await fetch(`${SERVER_URL}${path}`, {
+    res = await fetch(`${SERVER_URL}${fullPath}`, {
       method,
       credentials: "include",
       headers: { ...headers, accesskey: accessKey },
@@ -35,6 +38,7 @@ export const checkAuthorisation = async (callback) => {
       "GET",
       { "Content-Type": "application/json" },
       null,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -47,7 +51,7 @@ export const checkAuthorisation = async (callback) => {
 
 export const getInsights = async (callback) => {
   try {
-    return sendRequest(`/insights`, "GET", {}, null, async (res) => {
+    return sendRequest(`/insights`, "GET", {}, null, null, async (res) => {
       if (callback) return callback(await res.json());
       return res.json();
     });
@@ -65,6 +69,7 @@ export const addMentor = async (mentorData, callback) => {
       "POST",
       { "Content-Type": "application/json" },
       mentorData,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -82,6 +87,7 @@ export const modifyMentor = async (id, updatedData, callback) => {
       "PUT",
       { "Content-Type": "application/json" },
       updatedData,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -94,10 +100,17 @@ export const modifyMentor = async (id, updatedData, callback) => {
 
 export const deleteMentor = async (id, callback) => {
   try {
-    return sendRequest(`/mentors/${id}`, "DELETE", {}, null, async (res) => {
-      if (callback) return callback(await res.json());
-      return res.json();
-    });
+    return sendRequest(
+      `/mentors/${id}`,
+      "DELETE",
+      {},
+      null,
+      null,
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
   } catch (error) {
     return { error: "Something went wrong" };
   }
@@ -105,7 +118,7 @@ export const deleteMentor = async (id, callback) => {
 
 export const getMentor = async (id, callback) => {
   try {
-    return sendRequest(`/mentors/${id}`, "GET", {}, null, async (res) => {
+    return sendRequest(`/mentors/${id}`, "GET", {}, null, null, async (res) => {
       if (callback) return callback(await res.json());
       return res.json();
     });
@@ -114,12 +127,19 @@ export const getMentor = async (id, callback) => {
   }
 };
 
-export const getAllMentors = async (callback) => {
+export const getAllMentors = async (limit = 1000, skip = 0, callback) => {
   try {
-    return sendRequest(`/mentors/`, "GET", {}, null, async (res) => {
-      if (callback) return callback(await res.json());
-      return res.json();
-    });
+    return sendRequest(
+      `/mentors/`,
+      "GET",
+      {},
+      null,
+      { limit, skip },
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
   } catch (error) {
     return { error: "Something went wrong" };
   }
@@ -134,6 +154,7 @@ export const addMentee = async (menteeData, callback) => {
       "POST",
       { "Content-Type": "application/json" },
       menteeData,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -151,6 +172,7 @@ export const modifyMentee = async (id, updatedData, callback) => {
       "PUT",
       { "Content-Type": "application/json" },
       updatedData,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -163,10 +185,17 @@ export const modifyMentee = async (id, updatedData, callback) => {
 
 export const deleteMentee = async (id, callback) => {
   try {
-    return sendRequest(`/mentees/${id}`, "DELETE", {}, null, async (res) => {
-      if (callback) return callback(await res.json());
-      return res.json();
-    });
+    return sendRequest(
+      `/mentees/${id}`,
+      "DELETE",
+      {},
+      null,
+      null,
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
   } catch (error) {
     return { error: "Something went wrong" };
   }
@@ -174,7 +203,7 @@ export const deleteMentee = async (id, callback) => {
 
 export const getMentee = async (id, callback) => {
   try {
-    return sendRequest(`/mentees/${id}`, "GET", {}, null, async (res) => {
+    return sendRequest(`/mentees/${id}`, "GET", {}, null, null, async (res) => {
       if (callback) return callback(await res.json());
       return res.json();
     });
@@ -183,12 +212,19 @@ export const getMentee = async (id, callback) => {
   }
 };
 
-export const getAllMentees = async (callback) => {
+export const getAllMentees = async (limit = 1000, skip = 0, callback) => {
   try {
-    return sendRequest(`/mentees/`, "GET", {}, null, async (res) => {
-      if (callback) return callback(await res.json());
-      return res.json();
-    });
+    return sendRequest(
+      `/mentees/`,
+      "GET",
+      {},
+      null,
+      { limit, skip },
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
   } catch (error) {
     return { error: "Something went wrong" };
   }
@@ -203,6 +239,7 @@ export const addMonthlySalaryRecord = async (salaryData, callback) => {
       "POST",
       { "Content-Type": "application/json" },
       salaryData,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -220,6 +257,7 @@ export const modifyMonthlySalaryRecord = async (id, updatedData, callback) => {
       "PUT",
       { "Content-Type": "application/json" },
       updatedData,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -237,6 +275,25 @@ export const deleteMonthlySalaryRecord = async (id, callback) => {
       "DELETE",
       {},
       null,
+      null,
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
+export const auditMonthlySalaryRecord = async (mentorId, month, callback) => {
+  try {
+    return sendRequest(
+      `/audit`,
+      "POST",
+      { "Content-Type": "application/json" },
+      { mentorId, month },
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -249,21 +306,39 @@ export const deleteMonthlySalaryRecord = async (id, callback) => {
 
 export const getMonthlySalaryRecord = async (id, callback) => {
   try {
-    return sendRequest(`/salary/logs/${id}`, "GET", {}, null, async (res) => {
-      if (callback) return callback(await res.json());
-      return res.json();
-    });
+    return sendRequest(
+      `/salary/logs/${id}`,
+      "GET",
+      {},
+      null,
+      null,
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
   } catch (error) {
     return { error: "Something went wrong" };
   }
 };
 
-export const getAllMonthlySalaryRecord = async (callback) => {
+export const getAllMonthlySalaryRecord = async (
+  limit = 1000,
+  skip = 0,
+  callback
+) => {
   try {
-    return sendRequest(`/salary/logs`, "GET", {}, null, async (res) => {
-      if (callback) return callback(await res.json());
-      return res.json();
-    });
+    return sendRequest(
+      `/salary/logs`,
+      "GET",
+      {},
+      null,
+      { limit, skip },
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
   } catch (error) {
     return { error: "Something went wrong" };
   }
@@ -278,6 +353,7 @@ export const addDailySalaryRecord = async (salaryData, callback) => {
       "POST",
       { "Content-Type": "application/json" },
       salaryData,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -301,6 +377,7 @@ export const modifyDailySalaryRecord = async (
       "POST",
       { "Content-Type": "application/json" },
       body,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -318,6 +395,7 @@ export const deleteDailySalaryRecord = async (id, callback) => {
       "DELETE",
       {},
       null,
+      null,
       async (res) => {
         if (callback) return callback(await res.json());
         return res.json();
@@ -330,21 +408,39 @@ export const deleteDailySalaryRecord = async (id, callback) => {
 
 export const getDailySalaryRecord = async (id, callback) => {
   try {
-    return sendRequest(`/salary/daily/${id}`, "GET", {}, null, async (res) => {
-      if (callback) return callback(await res.json());
-      return res.json();
-    });
+    return sendRequest(
+      `/salary/daily/${id}`,
+      "GET",
+      {},
+      null,
+      null,
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
   } catch (error) {
     return { error: "Something went wrong" };
   }
 };
 
-export const getAllDailySalaryRecord = async (callback) => {
+export const getAllDailySalaryRecord = async (
+  limit = 1000,
+  skip = 0,
+  callback
+) => {
   try {
-    return sendRequest(`/salary/daily`, "GET", {}, null, async (res) => {
-      if (callback) return callback(await res.json());
-      return res.json();
-    });
+    return sendRequest(
+      `/salary/daily`,
+      "GET",
+      {},
+      null,
+      { limit, skip },
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
   } catch (error) {
     return { error: "Something went wrong" };
   }
@@ -356,6 +452,7 @@ export const getAllMentorLeaveRecord = async (mentorId, callback) => {
       `/salary/leaves/${mentorId}`,
       "GET",
       {},
+      null,
       null,
       async (res) => {
         if (callback) return callback(await res.json());

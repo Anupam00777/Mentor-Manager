@@ -25,7 +25,9 @@ async function DeleteMentor(name, id) {
   });
 }
 // Function to populate the mentor table
-function populateMentorTable(mentors) {
+async function populateMentorTable(limit = 50, skip = 0) {
+  const mentors = await getAllMentors(limit, skip);
+  if (mentors.length === 0) return 0;
   const tbody = document.getElementById("mentors-tbody");
   tbody.innerHTML = ""; // Clear existing content
 
@@ -62,14 +64,27 @@ function populateMentorTable(mentors) {
       .getElementById(`Delete_${mentor.id}`)
       .addEventListener("click", () => DeleteMentor(mentor.name, mentor.id));
   });
+  return 1;
 }
 
 // Function to load mentors on page load
+let limit = 50; // Set the limit for pagination
+let skip = 0; // Initial skip value
 async function loadMentors() {
-  const mentors = await getAllMentors();
-  console.log(mentors);
+  document.getElementById("next-page").addEventListener("click", async () => {
+    skip += limit; // Increase skip for next page
+    const res = await populateMentorTable(limit, skip);
+    if (res === 0) skip -= limit; // If no more mentors, revert skip
+  });
 
-  populateMentorTable(mentors);
+  document.getElementById("prev-page").addEventListener("click", () => {
+    if (skip > 0) {
+      skip = Math.max(0, skip - limit); // Decrease skip for previous page
+      populateMentorTable(limit, skip);
+    }
+  });
+
+  await populateMentorTable(limit, skip);
 }
 
 // Call loadMentors on page load
