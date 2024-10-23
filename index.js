@@ -15,7 +15,6 @@ autoUpdater.on("update-available", () => {
     })
     .then((result) => {
       if (result.response === 0) {
-        // Yes button
         autoUpdater.downloadUpdate();
       }
     });
@@ -35,6 +34,21 @@ autoUpdater.on("update-downloaded", () => {
         autoUpdater.quitAndInstall();
       }
     });
+});
+
+autoUpdater.on("error", (error) => {
+  dialog.showErrorBox(
+    "Update Error",
+    error == null ? "unknown" : (error.stack || error).toString()
+  );
+});
+
+autoUpdater.on("checking-for-update", () => {
+  console.log("Checking for updates...");
+});
+
+autoUpdater.on("update-not-available", () => {
+  console.log("No updates available.");
 });
 
 // Create the main application window
