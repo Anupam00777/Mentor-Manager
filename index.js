@@ -4,22 +4,41 @@ const path = require("path");
 
 let win;
 
-autoUpdater.checkForUpdatesAndNotify();
-
-// Optional: Handle events for update events
+// Set up autoUpdater
 autoUpdater.on("update-available", () => {
-  alert(
-    "Update Available - Installing updates, once completed the app will restart."
-  );
+  dialog
+    .showMessageBox(win, {
+      type: "info",
+      title: "Update Available",
+      message: "A new version is available. Do you want to download it?",
+      buttons: ["Yes", "No"],
+    })
+    .then((result) => {
+      if (result.response === 0) {
+        // Yes button
+        autoUpdater.downloadUpdate();
+      }
+    });
 });
 
 autoUpdater.on("update-downloaded", () => {
-  console.log("Update downloaded; will install now");
-  autoUpdater.quitAndInstall();
+  dialog
+    .showMessageBox(win, {
+      type: "info",
+      title: "Update Ready",
+      message: "Update downloaded. It will be installed on quit. Restart now?",
+      buttons: ["Restart", "Later"],
+    })
+    .then((result) => {
+      if (result.response === 0) {
+        // Restart button
+        autoUpdater.quitAndInstall();
+      }
+    });
 });
 
+// Create the main application window
 function createWindow() {
-  // Function to create new windows with the same properties
   win = new BrowserWindow({
     width: 1920,
     height: 1080,
@@ -29,6 +48,7 @@ function createWindow() {
       contextIsolation: false,
     },
   });
+
   win.webContents.setWindowOpenHandler(({ url }) => {
     return {
       action: "allow",
@@ -49,9 +69,12 @@ function createWindow() {
   win.on("closed", () => {
     win = null;
   });
+
+  // Start checking for updates
+  autoUpdater.checkForUpdatesAndNotify();
 }
 
-// Listen for the show-popup event
+// Handle IPC events for popups and prompts
 ipcMain.handle(
   "show-popup",
   async (event, title, message, type = "warning") => {
@@ -61,15 +84,14 @@ ipcMain.handle(
       title: title || "Confirm Action",
       message: message || "Are you sure you want to continue?",
     });
-
-    return result.response === 1; // returns true if "Continue", false if "Cancel"
+    return result.response === 1; // Returns true if "Continue", false if "Cancel"
   }
 );
 
 ipcMain.handle(
   "show-prompt",
   async (event, promptMessage = "Please enter something") => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const promptWindow = new BrowserWindow({
         width: 500,
         height: 500,
@@ -108,6 +130,7 @@ ipcMain.on("show-alert", (event, title, message, type = "info") => {
   });
 });
 
+// App lifecycle events
 app.on("ready", createWindow);
 
 app.on("window-all-closed", () => {
