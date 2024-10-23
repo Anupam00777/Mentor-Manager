@@ -37,4 +37,4 @@ jobs:
             frontend/dist/Mentor Manager Setup ${{ env.VERSION }}.exe
             frontend/dist/Mentor Manager-${{ env.VERSION }}-arm64-mac.zip # Include the .zip file
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN  }}
