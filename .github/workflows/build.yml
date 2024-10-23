@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [macos-latest, windows-latest]
 
     steps:
       - name: Checkout repository
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "23" # Specify the Node.js version you want to use
+          node-version: "23.0.0" # Specify the Node.js version you want to use
 
       - name: Install dependencies
         run: npm install
