@@ -32,7 +32,8 @@
       "target": [
         "dmg",
         "zip"
-      ]
+      ],
+      "icon": "favicon.icns"
     },
     "directories": {
       "output": "dist"
