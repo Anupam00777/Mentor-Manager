@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-    tags:
-      - "v*" # Trigger on version tags
 
 jobs:
   build:
@@ -21,20 +19,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "23.0.0" # Specify the Node.js version you want to use
+          node-version: "23.0.0"
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build the app
-        run: npm run build # Ensure you have a build script in your package.json
-
-      - name: Publish Release
-        uses: softprops/action-gh-release@v1
+      - name: Build/release Electron app
+        uses: samuelmeuli/action-electron-builder@v1
         with:
-          tag_name: v${{ github.run_number }} # Adjust if needed
-          files: |
-            frontend/dist/Mentor Manager Setup ${{ env.VERSION }}.exe
-            frontend/dist/Mentor Manager-${{ env.VERSION }}-arm64-mac.zip # Include the .zip file
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          github_token: ${{ secrets.github_token }}
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
