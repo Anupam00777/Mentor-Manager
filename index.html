@@ -8,23 +8,7 @@
   </head>
   <body class="bg-gray-100 text-gray-900">
     <!-- Navbar -->
-    <nav class="bg-white shadow-lg p-4">
-      <div class="container mx-auto flex justify-between">
-        <div class="text-xl font-bold">Mentor Salary Management</div>
-        <ul class="flex space-x-6">
-          <li><a href="#" class="hover:text-blue-500">Dashboard</a></li>
-          <li>
-            <a href="pages/mentors.html" class="hover:text-blue-500">Mentors</a>
-          </li>
-          <li>
-            <a href="pages/mentees.html" class="hover:text-blue-500">Mentees</a>
-          </li>
-          <li>
-            <a href="pages/salary.html" class="hover:text-blue-500">Salary</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div id="nav-bar"></div>
 
     <!-- Main Dashboard Section -->
     <div class="container mx-auto py-12">
@@ -94,5 +78,9 @@
       </div>
     </div>
     <script type="module" src="./main.js"></script>
+    <script type="module">
+      import { initializeNavBar } from "./js/nav.js";
+      initializeNavBar();
+    </script>
   </body>
 </html>

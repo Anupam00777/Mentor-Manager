@@ -80,6 +80,18 @@ function createWindow() {
 
   win.loadFile("index.html");
 
+  ipcMain.on("open-file-browser", () => {
+    const fileBrowserWindow = new BrowserWindow({
+      width: 1920,
+      height: 1080,
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+      },
+    });
+
+    fileBrowserWindow.loadURL("http://manage.mentorpreptests.in/files");
+  });
   win.on("closed", () => {
     win = null;
   });
