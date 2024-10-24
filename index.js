@@ -84,6 +84,7 @@ function createWindow() {
     const fileBrowserWindow = new BrowserWindow({
       width: 1920,
       height: 1080,
+      autoHideMenuBar: true,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
