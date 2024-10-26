@@ -80,6 +80,24 @@ export const addMentor = async (mentorData, callback) => {
   }
 };
 
+export const addMentorsFromCSV = async (CSVFile, callback) => {
+  try {
+    return sendRequest(
+      `/mentors/addFromCSV`,
+      "POST",
+      { "Content-Type": "application/json" },
+      { file: CSVFile },
+      null,
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
 export const modifyMentor = async (id, updatedData, callback) => {
   try {
     return sendRequest(
@@ -165,6 +183,24 @@ export const addMentee = async (menteeData, callback) => {
   }
 };
 
+export const addMenteesFromCSV = async (CSVFile, callback) => {
+  try {
+    return sendRequest(
+      `/mentees/addFromCSV`,
+      "POST",
+      { "Content-Type": "application/json" },
+      { file: CSVFile },
+      null,
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
 export const modifyMentee = async (id, updatedData, callback) => {
   try {
     return sendRequest(
@@ -239,6 +275,24 @@ export const addMonthlySalaryRecord = async (salaryData, callback) => {
       "POST",
       { "Content-Type": "application/json" },
       salaryData,
+      null,
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
+export const addSalaryRecordsFromCSV = async (CSVFile, callback) => {
+  try {
+    return sendRequest(
+      `/salary/addFromCSV`,
+      "POST",
+      { "Content-Type": "application/json" },
+      { file: CSVFile },
       null,
       async (res) => {
         if (callback) return callback(await res.json());

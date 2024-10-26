@@ -5,6 +5,7 @@ import {
   modifyMonthlySalaryRecord,
   getAllMentors,
   auditMonthlySalaryRecord,
+  addSalaryRecordsFromCSV,
 } from "./RequestHandler.js";
 
 // Edit salary function
@@ -140,6 +141,42 @@ async function loadSalaries() {
       populateSalaryTable(limit, skip);
     }
   });
+  document
+    .getElementById("csvUpload")
+    .addEventListener("change", async function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const confirm = await showConfirmation(
+          `Do you want to upload ${file.name}?`,
+          "This action will take some time depending on the amount of data"
+        );
+
+        if (confirm) {
+          const reader = new FileReader();
+          reader.onload = async function (e) {
+            console.log(confirm);
+            const fileContent = e.target.result;
+            console.log(fileContent);
+
+            const res = await addSalaryRecordsFromCSV(fileContent);
+            if (res.error) {
+              showAlert(
+                "Something went wrong!",
+                `Please check your CSV file`,
+                "error"
+              );
+              return;
+            }
+            showAlert(
+              "Success",
+              `Number of rows inserted: ${res.rowCount}`,
+              "info"
+            );
+          };
+          reader.readAsText(file);
+        }
+      }
+    });
 
   await populateSalaryTable(limit, skip);
 }

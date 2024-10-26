@@ -1,5 +1,9 @@
 import { showAlert, showConfirmation } from "../utilities.js";
-import { deleteMentor, getAllMentors } from "./RequestHandler.js";
+import {
+  addMentorsFromCSV,
+  deleteMentor,
+  getAllMentors,
+} from "./RequestHandler.js";
 
 // Edit mentor function
 function EditMentor(id) {
@@ -83,6 +87,42 @@ async function loadMentors() {
       populateMentorTable(limit, skip);
     }
   });
+  document
+    .getElementById("csvUpload")
+    .addEventListener("change", async function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const confirm = await showConfirmation(
+          `Do you want to upload ${file.name}?`,
+          "This action will take some time depending on the amount of data"
+        );
+
+        if (confirm) {
+          const reader = new FileReader();
+          reader.onload = async function (e) {
+            console.log(confirm);
+            const fileContent = e.target.result;
+            console.log(fileContent);
+
+            const res = await addMentorsFromCSV(fileContent);
+            if (res.error) {
+              showAlert(
+                "Something went wrong!",
+                `Please check your CSV file`,
+                "error"
+              );
+              return;
+            }
+            showAlert(
+              "Success",
+              `Number of rows inserted: ${res.rowCount}`,
+              "info"
+            );
+          };
+          reader.readAsText(file);
+        }
+      }
+    });
 
   await populateMentorTable(limit, skip);
 }
