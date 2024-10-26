@@ -93,6 +93,12 @@ function createWindow() {
 
     fileBrowserWindow.loadURL("http://manage.mentorpreptests.in/files");
   });
+
+  ipcMain.on("navigate", (event, url) => {
+    win.loadURL(`${app.getAppPath()}${url}`).catch((error) => {
+      console.error("Failed to load URL:", error);
+    });
+  });
   win.on("closed", () => {
     win = null;
   });

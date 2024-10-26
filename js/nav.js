@@ -1,3 +1,4 @@
+// navBar.js
 export const navBar = `
 <nav class="bg-white shadow-lg p-4">
     <div class="container mx-auto flex justify-between">
@@ -16,10 +17,12 @@ export const navBar = `
 export function initializeNavBar() {
   document.getElementById("nav-bar").innerHTML = navBar;
 
+  // Handle the file browser link
   const fileBrowserLink = document.getElementById("fileBrowserLink");
   if (fileBrowserLink) {
     fileBrowserLink.addEventListener("click", (event) => {
       event.preventDefault();
+      // Check if running in Electron, if not, use regular navigation
       if (typeof require !== "undefined" && require("electron")) {
         const { ipcRenderer } = require("electron");
         ipcRenderer.send("open-file-browser");
@@ -29,15 +32,21 @@ export function initializeNavBar() {
     });
   }
   const navLinks = {
-    dashboardLink: window.location.origin + "/index.html",
-    mentorsLink: window.location.origin + "/pages/mentors.html",
-    menteesLink: window.location.origin + "/pages/mentees.html",
-    salaryLink: window.location.origin + "/pages/salary.html",
+    dashboardLink: "/index.html",
+    mentorsLink: "/pages/mentors.html",
+    menteesLink: "/pages/mentees.html",
+    salaryLink: "/pages/salary.html",
   };
 
-  for (const [key, url] of Object.entries(navLinks)) {
+  // Set up event listeners for navigation
+  for (const [key, filePath] of Object.entries(navLinks)) {
     document.getElementById(key).addEventListener("click", (event) => {
-      window.location.href = url;
+      if (typeof require !== "undefined" && require("electron")) {
+        const { ipcRenderer } = require("electron");
+        ipcRenderer.send("navigate", filePath);
+      } else {
+        window.location.href = window.location.origin + "/" + filePath;
+      }
     });
   }
 }
