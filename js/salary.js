@@ -94,22 +94,32 @@ async function populateSalaryTable(limit = 50, skip = 0) {
   <td class="px-4 py-2">${salary.month}</td>
   <td class="px-4 py-2">${salary.days_worked}</td>
   <td class="px-4 py-2">${salary.total_leaves}</td>
-  <td class="px-4 py-2">₹${salary.total_salary}</td>
+  <td class="px-4 py-2">₹${salary.total_salary.toFixed(2)}</td>
   <td class="px-4 py-2">${salary.status}</td>
   <td class="px-4 py-2 flex space-x-4">
-      <button id="Settle_${salary.id}" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">
+      <button id="Settle_${
+        salary.id
+      }" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">
           Settle
       </button>
-      <button id="Edit_${salary.id}" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">
+      <button id="Edit_${
+        salary.id
+      }" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">
           Edit
       </button>
-      <button id="Audit_${salary.id}" class="bg-yellow-500 text-white px-4 py-1 rounded hover:bg-yellow-600">
+      <button id="Audit_${
+        salary.id
+      }" class="bg-yellow-500 text-white px-4 py-1 rounded hover:bg-yellow-600">
           Audit
       </button>
-      <button id="Delete_${salary.id}" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">
+      <button id="Delete_${
+        salary.id
+      }" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">
           Delete
       </button>
-      <button id="Download_${salary.id}" class="bg-white text-black px-4 py-1 rounded hover:bg-gray-100 border">
+      <button id="Download_${
+        salary.id
+      }" class="bg-white text-black px-4 py-1 rounded hover:bg-gray-100 border">
           Download
       </button>
   </td>

@@ -54,13 +54,17 @@ async function populateLogsTable(id, limit = 50, skip = 0) {
   <td class="px-4 py-2">${log.month}</td>
   <td class="px-4 py-2">${log.date}</td>
   <td class="px-4 py-2">${log.mentee_count}</td>
-  <td class="px-4 py-2">₹${log.salary}</td>
+  <td class="px-4 py-2">₹${log.salary.toFixed(2)}</td>
   <td class="px-4 py-2">${log.status}</td>
   <td class="px-4 py-2 flex space-x-4">
-      <button id="Edit_${log.id}" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">
+      <button id="Edit_${
+        log.id
+      }" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">
           Edit
       </button>
-      <button id="Delete_${log.id}" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">
+      <button id="Delete_${
+        log.id
+      }" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">
           Delete
       </button>
   </td>
