@@ -6,6 +6,7 @@ import {
   getAllMentors,
   auditMonthlySalaryRecord,
   addSalaryRecordsFromCSV,
+  downloadPayslip,
 } from "./RequestHandler.js";
 
 // Edit salary function
@@ -66,6 +67,13 @@ async function AuditSalary(mentorId, month, name) {
       });
     }
   });
+} // Audit  salary function
+async function DownloadSalarySlip(id) {
+  downloadPayslip(id).then((res) => {
+    if (res.error) {
+      showAlert("Error", "Error in downloading salary record", "error");
+    }
+  });
 }
 // Function to populate the salary table
 async function populateSalaryTable(limit = 50, skip = 0) {
@@ -100,6 +108,9 @@ async function populateSalaryTable(limit = 50, skip = 0) {
       <button id="Delete_${salary.id}" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">
           Delete
       </button>
+      <button id="Download_${salary.id}" class="bg-white text-black px-4 py-1 rounded hover:bg-gray-100 border">
+          Download
+      </button>
   </td>
 `;
     tbody.appendChild(row);
@@ -121,6 +132,9 @@ async function populateSalaryTable(limit = 50, skip = 0) {
       .addEventListener("click", () =>
         AuditSalary(salary.mentor_id, salary.month, mentorName)
       );
+    document
+      .getElementById(`Download_${salary.id}`)
+      .addEventListener("click", () => DownloadSalarySlip(salary.id));
   });
   return 1;
 }

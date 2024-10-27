@@ -398,6 +398,41 @@ export const getAllMonthlySalaryRecord = async (
   }
 };
 
+export const downloadPayslip = async (id, callback) => {
+  try {
+    return sendRequest(
+      `/generate-payslip/${id}`,
+      "GET",
+      {},
+      null,
+      null,
+      async (res) => {
+        // Convert the response to a Blob (binary large object) to handle file download
+        const blob = await res.blob();
+
+        // Create a temporary URL for the blob
+        const url = window.URL.createObjectURL(blob);
+
+        // Create a link element to trigger the download
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `payslip_${id}.xlsx`; // Change the file name and extension based on the file type
+        document.body.appendChild(a);
+        a.click();
+
+        // Cleanup: remove the temporary link and release the blob URL
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+        // Call the callback if provided
+        if (callback) return callback();
+      }
+    );
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
 ////////////////////////////////////// DAILY SALARIES ///////////////////////////////////////
 
 export const addDailySalaryRecord = async (salaryData, callback) => {
