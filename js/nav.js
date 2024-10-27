@@ -1,3 +1,5 @@
+import { navigate } from "../utilities.js";
+
 // navBar.js
 export const navBar = `
 <nav class="bg-white shadow-lg p-4">
@@ -5,6 +7,7 @@ export const navBar = `
         <div class="text-xl font-bold">Mentor Salary Management</div>
         <ul class="flex space-x-6" id="nav-links">
             <li><a id="dashboardLink" class="hover:text-blue-500 cursor-pointer">Dashboard</a></li>
+            <li><a id="dailyLogsLink" class="hover:text-blue-500 cursor-pointer">Daily Logs</a></li>
             <li><a id="mentorsLink" class="hover:text-blue-500 cursor-pointer">Mentors</a></li>
             <li><a id="menteesLink" class="hover:text-blue-500 cursor-pointer">Mentees</a></li>
             <li><a id="salaryLink" class="hover:text-blue-500 cursor-pointer">Salary</a></li>
@@ -36,14 +39,14 @@ export function initializeNavBar() {
     mentorsLink: "/pages/mentors.html",
     menteesLink: "/pages/mentees.html",
     salaryLink: "/pages/salary.html",
+    dailyLogsLink: "/pages/dailyLogs.html",
   };
 
   // Set up event listeners for navigation
   for (const [key, filePath] of Object.entries(navLinks)) {
     document.getElementById(key).addEventListener("click", (event) => {
       if (typeof require !== "undefined" && require("electron")) {
-        const { ipcRenderer } = require("electron");
-        ipcRenderer.send("navigate", filePath);
+        navigate(filePath);
       } else {
         window.location.href = window.location.origin + "/" + filePath;
       }

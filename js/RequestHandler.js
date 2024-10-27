@@ -453,6 +453,24 @@ export const addDailySalaryRecord = async (salaryData, callback) => {
   }
 };
 
+export const addDailySalaryRecordsFromCSV = async (CSVFile, callback) => {
+  try {
+    return sendRequest(
+      `/salary/addFromCSV`,
+      "POST",
+      { "Content-Type": "application/json" },
+      { file: CSVFile },
+      null,
+      async (res) => {
+        if (callback) return callback(await res.json());
+        return res.json();
+      }
+    );
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
 export const modifyDailySalaryRecord = async (
   filter,
   updatedData,
@@ -514,13 +532,14 @@ export const getDailySalaryRecord = async (id, callback) => {
 };
 
 export const getAllDailySalaryRecord = async (
+  id,
   limit = 1000,
   skip = 0,
   callback
 ) => {
   try {
     return sendRequest(
-      `/salary/daily`,
+      `/salary/daily/mentor/${id}`,
       "GET",
       {},
       null,

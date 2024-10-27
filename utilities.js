@@ -74,3 +74,7 @@ export function removeFalsyValues(data) {
   }
   return data;
 }
+
+export function navigate(path) {
+  ipcRenderer.send("navigate", path);
+}

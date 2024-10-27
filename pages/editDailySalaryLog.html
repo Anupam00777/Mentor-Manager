@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentor Salary Management - Add/Edit Daily Salary Log</title>
+    <link rel="stylesheet" href="../style.dist.css" />
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <!-- Main Form Section -->
+    <div class="container mx-auto py-12">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold" id="form-title">Add/Edit Daily Log</h1>
+      </div>
+
+      <!-- Salary Log Form -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <form id="daily-log-form">
+          <div class="grid grid-cols-2 gap-6">
+            <!-- Month -->
+            <div>
+              <label for="month" class="block text-gray-700 font-medium"
+                >Month</label
+              >
+              <input
+                type="month"
+                id="month"
+                name="month"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label for="mentor-start" class="block text-gray-700 font-medium"
+                >Date</label
+              >
+              <input
+                type="date"
+                id="date"
+                name="date"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <!-- Total Salary -->
+            <div>
+              <label for="total-salary" class="block text-gray-700 font-medium"
+                >No. of Mentees</label
+              >
+              <input
+                type="text"
+                id="mentee_count"
+                name="mentee_count"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter No. of Mentees"
+                required
+                pattern="^\d+$"
+                title="Please enter a valid amount (e.g., 5,10)"
+              />
+            </div>
+
+            <!-- Status -->
+            <div>
+              <label for="status" class="block text-gray-700 font-medium"
+                >Status</label
+              >
+              <select
+                id="status"
+                name="status"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="active">Active</option>
+                <option value="onLeave">On Leave</option>
+                <option value="inActive">In Active</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="mt-6">
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="../js/editDailySalaryLog.js"></script>
+  </body>
+</html>

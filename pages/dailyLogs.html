@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentor Salary Management - Daily Logs</title>
+    <link rel="stylesheet" href="../style.dist.css" />
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <!-- Navbar -->
+    <div id="nav-bar"></div>
+
+    <!-- Main Salary Section -->
+    <div class="container mx-auto py-12">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">Daily Log</h1>
+        <div class="w-full max-w-xs mx-auto">
+          <label
+            for="custom-select"
+            class="block text-sm font-medium text-gray-700 mb-2"
+            >Choose a Mentor:</label
+          >
+          <div class="relative">
+            <select
+              id="custom-select"
+              class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm bg-white"
+            >
+              <option value="" disabled selected>Select your option</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="space-x-2">
+          <button
+            class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+            onclick="window.location.href = window.location.href"
+          >
+            Refresh
+          </button>
+          <a
+            class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+            href="editDailySalaryLog.html"
+            target="_blank"
+          >
+            Add New Record
+          </a>
+          <label
+            class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 cursor-pointer"
+          >
+            Add Records From CSV
+            <input type="file" accept=".csv" class="hidden" id="csvUpload" />
+          </label>
+        </div>
+      </div>
+      <div class="flex w-full justify-between items-center mb-6">
+        <button
+          class="bg-transparent text-black text-center px-6 text-3xl"
+          id="prev-page"
+        >
+          &larr;
+        </button>
+        <button
+          class="bg-transparent text-black text-center px-6 text-3xl"
+          id="next-page"
+        >
+          &rarr;
+        </button>
+      </div>
+      <!-- Salaries List Table -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <table class="min-w-full table-auto">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Month
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Date
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                No. of Mentees
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Total Salary
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Status
+              </th>
+              <th class="px-4 py-2 text-left text-gray-600 font-medium">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody id="daily-log-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <script type="module" src="../js/dailyLogs.js"></script>
+    <script type="module">
+      import { initializeNavBar } from "../js/nav.js";
+      initializeNavBar();
+    </script>
+  </body>
+</html>
