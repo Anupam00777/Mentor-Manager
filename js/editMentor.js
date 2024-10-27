@@ -35,6 +35,11 @@ function populateForm(mentor) {
     mentor.start_date.split("T")[0];
   document.getElementById("mentor-leaves").value = mentor.paid_leaves;
   document.getElementById("mentor-status").value = mentor.status;
+  if (mentor.status === "inTraining") {
+    document.getElementById("mentor-status").disabled = true;
+  } else {
+    document.getElementById("trainingOption").style.display = "none";
+  }
 }
 
 // Function to populate the mentor table

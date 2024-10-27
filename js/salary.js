@@ -87,7 +87,8 @@ async function populateSalaryTable(limit = 50, skip = 0) {
     if (index % 2 === 1) {
       row.classList.add("bg-gray-100"); // Light gray for odd rows
     }
-    const mentorName = mentors?.find((m) => m.id === salary.mentor_id).name;
+    const mentorName =
+      mentors?.find((m) => m.id === salary.mentor_id)?.name || "Deleted Mentor";
     row.innerHTML = `
     <td class="px-4 py-2">${mentorName}</td>
   <td class="px-4 py-2">${salary.month}</td>
