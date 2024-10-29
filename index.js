@@ -95,7 +95,8 @@ function createWindow() {
   });
 
   ipcMain.on("navigate", (event, url) => {
-    win.loadURL(`${app.getAppPath()}${url}`).catch((error) => {
+    const fullPath = path.join(app.getAppPath(), url);
+    win.loadURL(`file://${fullPath}`).catch((error) => {
       console.error("Failed to load URL:", error);
     });
   });
