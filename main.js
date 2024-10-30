@@ -35,7 +35,7 @@ async function fetchInsights() {
 
 // Function to populate the salary table
 async function populateSalaryTable() {
-  const salaries = await getAllMonthlySalaryRecord();
+  const salaries = await getAllMonthlySalaryRecord(50, 0);
   const tbody = document.getElementById("salary-breakdown-tbody");
   tbody.innerHTML = ""; // Clear existing content
   const mentors = await getAllMentors();
