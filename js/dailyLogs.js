@@ -14,7 +14,7 @@ import {
 
 function EditSalaryLog(id, mentorId, payPerDayPerMentee) {
   window.open(
-    `editDailySalaryLog.html?id=${id}&mentor=${mentorId}&payPerDayPerMentee=${payPerDayPerMentee}`,
+    `editDailySalaryLog.html?id=${id}&mentorId=${mentorId}&payPerDayPerMentee=${payPerDayPerMentee}`,
     `_blank`
   );
 }
