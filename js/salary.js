@@ -91,7 +91,10 @@ async function populateSalaryTable(limit = 50, skip = 0) {
       mentors?.find((m) => m.id === salary.mentor_id)?.name || "Deleted Mentor";
     row.innerHTML = `
     <td class="px-4 py-2">${mentorName}</td>
-  <td class="px-4 py-2">${salary.month}</td>
+  <td class="px-4 py-2">${new Date(salary.month).toLocaleString("en-US", {
+    month: "short",
+    year: "numeric",
+  })}</td>
   <td class="px-4 py-2">${salary.days_worked}</td>
   <td class="px-4 py-2">${salary.total_leaves}</td>
   <td class="px-4 py-2">₹${salary.total_salary.toFixed(2)}</td>

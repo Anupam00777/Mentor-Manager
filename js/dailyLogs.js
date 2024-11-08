@@ -13,8 +13,9 @@ import {
 } from "./RequestHandler.js";
 
 function EditSalaryLog(id, mentorId, payPerDayPerMentee) {
+  const idParam = id === null ? "" : id;
   window.open(
-    `editDailySalaryLog.html?id=${id}&mentorId=${mentorId}&payPerDayPerMentee=${payPerDayPerMentee}`,
+    `editDailySalaryLog.html?id=${idParam}&mentorId=${mentorId}&payPerDayPerMentee=${payPerDayPerMentee}`,
     `_blank`
   );
 }
@@ -41,6 +42,7 @@ async function populateLogsTable(id, limit = 50, skip = 0) {
   if (!id) return;
   const mentor = await getMentor(id);
   const dailyLogs = await getAllDailySalaryRecord(id, limit, skip);
+
   if (dailyLogs.length === 0) return 0;
   const tbody = document.getElementById("daily-log-tbody");
   tbody.innerHTML = "";
@@ -51,8 +53,11 @@ async function populateLogsTable(id, limit = 50, skip = 0) {
       row.classList.add("bg-gray-100"); // Light gray for odd rows
     }
     row.innerHTML = `
-  <td class="px-4 py-2">${log.month}</td>
-  <td class="px-4 py-2">${log.date}</td>
+  <td class="px-4 py-2">${new Date(log.month).toLocaleString("en-IN", {
+    month: "short",
+    year: "numeric",
+  })}</td>
+  <td class="px-4 py-2">${new Date(log.date).toLocaleDateString("en-IN")}</td>
   <td class="px-4 py-2">${log.mentee_count}</td>
   <td class="px-4 py-2">₹${log.salary.toFixed(2)}</td>
   <td class="px-4 py-2">${log.status}</td>
@@ -73,12 +78,14 @@ async function populateLogsTable(id, limit = 50, skip = 0) {
     document
       .getElementById(`Edit_${log.id}`)
       .addEventListener("click", () =>
-        EditSalaryLog(log.id, id, mentor.pay_per_day_per_mentee)
+        EditSalaryLog(log.id, mentor.id, mentor.pay_per_day_per_mentee)
       );
     document
       .getElementById(`Delete_${log.id}`)
       .addEventListener("click", () => DeleteSalaryLog(log.date, log.id));
   });
+  document.getElementById("addNewRecord").onclick = () =>
+    EditSalaryLog(null, mentor.id, mentor.pay_per_day_per_mentee);
   return 1;
 }
 

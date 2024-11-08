@@ -46,7 +46,7 @@ async function populateMentorTable(limit = 50, skip = 0) {
   <td class="px-4 py-2">${mentor.mobile}</td>
   <td class="px-4 py-2">₹${mentor.pay_per_day_per_mentee.toFixed(2)}</td>
   <td class="px-4 py-2">${mentor.status}</td>
-  <td class="px-4 py-2">${mentor.start_date.split("T")[0]}</td>
+  <td class="px-4 py-2">${mentor.start_date.split("T")[0].split("-")[2]}</td>
   <td class="px-4 py-2 flex space-x-2">
       <button id="Edit_${
         mentor.id
