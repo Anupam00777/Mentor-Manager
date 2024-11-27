@@ -50,10 +50,10 @@ async function populateMenteeTable(limit = 50, skip = 0) {
   }</td>
   <td class="px-4 py-2">${mentee.status}</td>
   <td class="px-4 py-2">${new Date(
-    mentee.start_date.split("T")[0]
+    mentee.start_date?.split("T")[0]
   ).toLocaleDateString("en-IN")}</td>
   <td class="px-4 py-2">${new Date(
-    mentee.end_date.split("T")[0]
+    mentee.end_date?.split("T")[0]
   ).toLocaleDateString("en-IN")}</td>
   <td class="px-4 py-2 flex space-x-2">
       <button id="Edit_${
